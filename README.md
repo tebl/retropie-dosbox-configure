@@ -7,6 +7,15 @@ Collection of simple bash scripts that was thrown together in order to simplify 
 # Installation
 Scripts are installed by placing files (and directories) within your roms-folder, overwriting the stock "+Start DOSBox.sh" scripts as well as add a few new ones.
 
+```
+cd /tmp
+wget https://github.com/tebl/retropie-dosbox-configure/archive/master.zip
+mv retropie-dosbox-configure-master/roms/pc/* /home/pi/RetroPie/roms/pc/
+mv retropie-dosbox-configure-master/roms/pc.system /home/pi/RetroPie/roms/
+mv retropie-dosbox-configure-master/roms/pc.games /home/pi/RetroPie/roms/
+```
+
+
 # Configuring EmulationStation
 EmulationStation by default will not recognize the __.init__-files created by the configurator, so we'll need to customize it in order to recognize these files (and mainly ignore everything else). If you haven't already customized the es_systems.cfg you'll probably only find the default one in _/etc/emulationstation/es_systems.cfg_, this is usually customized by copying it to _/home/pi/.emulationstation/es_systems.cfg_.
 
