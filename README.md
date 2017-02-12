@@ -37,7 +37,11 @@ Customize it by changing the system configuration section for the PC to the foll
 ```
 
 __N.B. 1__ As with most things EmulationStation, no changes will take effect until you restart it.
+
 __N.B. 2__ Any emulators installed will only the change the default es_systems.cfg, but since we've overridden it those won't take effect with a customized file in place like we're doing here - to get the added features, either recopy the stock file and then change it or add the corresponding changes to the _/home/pi/.emulationstation/es_settings.cfg_.
+
+# Configuring DOSBox
+The scripts come with a separate version of the DOSBox-configuration file _"dosbox.conf"_, if you want to replace this with the stock configuration supplied with RetroPie then just copy that from ~/.dosbox/dosbox-SVN.conf - make sure to keep the two mount statements in autoexec-section of the supplied configuration (file still need to be kept in the same place and with the same name though).
 
 # Adding games
 Games are installed by unzipping them into the _pc.games_-folder so that each of them get their own folder, an already extracted copy of the game Doom II (TM) would have it's files placed within the folder _/home/pi/RetroPie/roms/pc.games/Doom2_.
