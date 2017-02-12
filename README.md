@@ -43,6 +43,9 @@ __N.B. 2__ Any emulators installed will only the change the default es_systems.c
 # Configuring DOSBox
 The scripts come with a separate version of the DOSBox-configuration file _"dosbox.conf"_, if you want to replace this with the stock configuration supplied with RetroPie then just copy that from ~/.dosbox/dosbox-SVN.conf - make sure to keep the two mount statements in autoexec-section of the supplied configuration (file still need to be kept in the same place and with the same name though).
 
+## Gravis Ultrasound Emulation
+If you have the Gravis Ultrasound drivers and utilities, these can be used within DOSBox by placing these within the _ULTRASND_-folder within __pc.system__ - full path being /home/pi/RetroPie/roms/pc.system/ULTRASND. DOSBox will, using the supplied configuration mount _pc.system_ as the C-drive, so the ultrasnd-option being set to _C:\ULTRASND_ should now work as expected.
+
 # Adding games
 Games are installed by unzipping them into the _pc.games_-folder so that each of them get their own folder, an already extracted copy of the game Doom II (TM) would have it's files placed within the folder _/home/pi/RetroPie/roms/pc.games/Doom2_.
 
