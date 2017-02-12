@@ -36,7 +36,16 @@ Customize it by changing the system configuration section for the PC to the foll
   </system>
 ```
 
+__N.B. 1__ As with most things EmulationStation, no changes will take effect until you restart it.
+__N.B. 2__ Any emulators installed will only the change the default es_systems.cfg, but since we've overridden it those won't take effect with a customized file in place like we're doing here - to get the added features, either recopy the stock file and then change it or add the corresponding changes to the _/home/pi/.emulationstation/es_settings.cfg_.
+
 # Adding games
 Games are installed by unzipping them into the _pc.games_-folder so that each of them get their own folder, an already extracted copy of the game Doom II (TM) would have it's files placed within the folder _/home/pi/RetroPie/roms/pc.games/Doom2_.
 
-In order to configure the game for use within RetroPie you'll need to set up how to start the game, this is done by running the "+Start DOSBox Configurator.sh" script either via SSH or by running it from emulationstation. Select the game as you want to configure from the list, then use __SelectExe__ to select the corresponding executable to start, this will create an init-file within _/home/pi/RetroPie/roms/pc_ so that emulationstation can recognize it (after configuring it to do so - see the next section). Note that EmulationStation only seems to generate the "roms"-list once on startup, so any newly added games will not show up until after you restart it.
+In order to configure the game for use within RetroPie you'll need to set up how to start the game, this is done by running the "+Start DOSBox Configurator.sh" script either via SSH or by running it from emulationstation. Select the game as you want to configure from the list, then use __SelectExe__ to select the corresponding executable to start, this will create an init-file within _/home/pi/RetroPie/roms/pc_ so that we can run it from EmulationStation. Starting it via SSH would be done as follows (logged in as user _pi_):
+```
+cd ~/RetroPie/roms/pc
+./+Start\ DOSBox\ Configurator.sh
+```
+
+Note that EmulationStation only seems to generate the "roms"-list once on startup, so any newly added games will not show up until after you restart it.
