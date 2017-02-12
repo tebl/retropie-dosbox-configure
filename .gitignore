@@ -1,15 +1,11 @@
 /roms/*
 
-!/roms/pc
-/roms/pc/*
 !/roms/pc/+Start DOSBox.sh
 !/roms/pc/+Start DOSBox Configurator.sh
 !/roms/pc/*.lib
 !/roms/pc/dosbox.conf
 
-/roms/pc.system/*
-!/roms/pc.system/ULTRASND
-/roms/pc.system/ULTRASND/*
+!/roms/pc.system/.gitkeep
+!/roms/pc.system/ULTRASND/.gitkeep
 
-!/roms/pc.games
-/roms/pc.games/*
+!/roms/pc.games/.gitkeep
