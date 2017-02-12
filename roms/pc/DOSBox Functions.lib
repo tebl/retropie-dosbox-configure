@@ -1,0 +1,94 @@
+function file_exists() {
+	if [ -e "$1" ]; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+function edit_file() {
+	nano -w "$1" 2>&1 1>/dev/tty
+}
+
+function show_dialog() {
+	MSG_TITLE=" $1 "
+	MSG_TEXT="$2"
+	dialog --ascii-lines --backtitle "$TITLE" --title "$MSG_TITLE" --msgbox "$MSG_TEXT" 30 80 2>&1 1>/dev/tty
+}
+
+function show_confirm() {
+	MSG_TITLE=" $1 "
+	MSG_TEXT="$2"
+	dialog --ascii-lines --backtitle "$TITLE" --title "$MSG_TITLE" --yesno "$MSG_TEXT" 30 80 2>&1 1>/dev/tty
+	return $?
+}
+
+function show_error() {
+	show_dialog "$1" "ERROR:\n\n$2"
+}
+
+function is_disabled() {
+	CONFIG="$1"
+	KEY="$2"
+
+	if [[ -e "$1" ]]; then
+		VALUE=$(fgrep "$KEY=" "$1" | awk '{split($0,a,"="); print a[2]}')
+		if [[ ! -z "$VALUE" ]]; then
+			if [[ "$VALUE" == "true" ]]; then
+				return 1
+			fi
+			return 0
+		fi
+	fi
+
+
+	if [[ -e "dosbox.conf" ]]; then
+		VALUE=$(fgrep "$KEY=" "dosbox.conf" | awk '{split($0,a,"="); print a[2]}')
+		if [[ ! -z "$VALUE" ]]; then
+			if [[ "$VALUE" == "true" ]]; then
+				return 1
+			fi
+			return 0
+		fi
+	fi
+	return 1
+}
+
+function toggle_option() {
+	CONFIG="$1"
+	KEY="$2"
+
+	if is_disabled "$CONFIG" "$KEY"; then
+		echo "enabling $KEY"
+		set_option "$CONFIG" "$KEY" "true"
+	else
+		echo "disabling $KEY"
+		set_option "$CONFIG" "$KEY" "false"
+	fi
+}
+
+function set_option() {
+	CONFIG="$1"
+	KEY="$2"
+	VALUE="$3"
+	if [[ ! -e "$CONFIG" ]]; then
+		create_dos_section "$CONFIG"
+	fi
+	SECTION=$(fgrep "[dos]" "$CONFIG")
+	if [[ -z "$SECTION" ]]; then
+		create_dos_section
+	fi
+
+	sed -i "s/^$KEY=.*/$KEY=$VALUE/g" "$CONFIG"
+	if [[ "$VALUE" == "true" ]]; then
+		show_dialog " Enabled $KEY " "DOSBox dos configuration option '$KEY' has been set to enabled in file '$CONFIG'"
+	else
+		show_dialog " Disabled $KEY " "DOSBox dos configuration option '$KEY' has been set to disabled in file '$CONFIG'"
+fi
+}
+
+function create_dos_section() {
+	echo "[dos]" >> "$CONFIG"
+	fgrep "xms=" "dosbox.conf" >> "$CONFIG"
+	fgrep "ems=" "dosbox.conf" >> "$CONFIG"
+}

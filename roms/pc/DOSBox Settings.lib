@@ -1,0 +1,4 @@
+TITLE="DOSBox Configurator"
+DIR="/home/pi/RetroPie/roms/pc"
+GAMEDIR="$DIR.games"
+CONFIG="/dev/shm/dosbox_game.conf"
